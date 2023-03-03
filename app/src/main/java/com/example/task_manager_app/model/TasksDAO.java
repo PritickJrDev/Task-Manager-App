@@ -1,4 +1,4 @@
-package com.example.task_manager_app.Model;
+package com.example.task_manager_app.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

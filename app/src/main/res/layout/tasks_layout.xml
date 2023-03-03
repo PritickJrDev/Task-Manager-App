@@ -4,7 +4,7 @@
     <data>
         <variable
             name="tasks"
-            type="com.example.task_manager_app.Model.Tasks" />
+            type="com.example.task_manager_app.model.Tasks"/>
     </data>
 
 

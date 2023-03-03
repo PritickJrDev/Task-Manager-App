@@ -1,4 +1,4 @@
-package com.example.task_manager_app.Model;
+package com.example.task_manager_app.model;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -32,7 +32,7 @@ public class Tasks extends BaseObservable {
 
     }
 
-    public Tasks(int taskId, String taskName, String dueDate, String description, String taskPriority) {
+    public Tasks(int taskId, String taskName, String dueDate, String taskPriority, String description) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskPriority = taskPriority;

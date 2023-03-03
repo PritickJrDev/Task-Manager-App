@@ -1,4 +1,4 @@
-package com.example.task_manager_app.Model;
+package com.example.task_manager_app.model;
 
 import android.content.Context;
 
@@ -49,10 +49,13 @@ public abstract class TasksDatabase extends RoomDatabase {
                 Tasks tasks1 = new Tasks();
                 tasks1.setTaskName("Example Task 1");
                 tasks1.setDueDate("N/A");
+                tasks1.setTaskPriority("Low");
 
                 Tasks tasks2 = new Tasks();
                 tasks2.setTaskName("Example Task 2");
                 tasks2.setDueDate("N/A");
+                tasks2.setTaskPriority("High");
+
 
                 tasksDAO.insert(tasks1);
                 tasksDAO.insert(tasks2);
