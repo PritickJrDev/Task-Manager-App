@@ -8,6 +8,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.task_manager_app.R;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -46,19 +48,15 @@ public abstract class TasksDatabase extends RoomDatabase {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                Tasks tasks1 = new Tasks();
-                tasks1.setTaskName("Example Task 1");
-                tasks1.setDueDate("N/A");
-                tasks1.setTaskPriority("Low");
+              /*  Tasks tasks1 = new Tasks();
+                tasks1.setTaskName("Task Name");
+                tasks1.setDueDate("Due Date");
+                tasks1.setTaskPriority("Priority");
+                tasks1.setDescription("Task Description");
+                tasks1.setStatus("task status");
+                tasks1.setStatusImage(R.drawable.baseline_check_circle_outline_24);
 
-                Tasks tasks2 = new Tasks();
-                tasks2.setTaskName("Example Task 2");
-                tasks2.setDueDate("N/A");
-                tasks2.setTaskPriority("High");
-
-
-                tasksDAO.insert(tasks1);
-                tasksDAO.insert(tasks2);
+                tasksDAO.insert(tasks1); */
             }
         });
     }

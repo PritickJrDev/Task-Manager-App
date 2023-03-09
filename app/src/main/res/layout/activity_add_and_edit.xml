@@ -28,14 +28,14 @@
     <EditText
         android:id="@+id/editText_description"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:layout_below="@id/editText_taskName"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:hint="Add Description"
-        android:lines="10"
+        android:lines="20"
         android:text="@={tasks.description}" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@={tasks.dueDate}"
-        android:hint="Set a date"
+        android:hint="Set due date"
         android:textSize="16sp"
         android:layout_below="@id/textView_setPriority"
         android:layout_marginLeft="30dp"
@@ -93,13 +93,14 @@
         android:layout_marginTop="20dp" />
 
     <android.widget.Button
+        android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{clickHandler::onSaveButtonClick}"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="20dp"
         android:background="@drawable/save_button"
+        android:onClick="@{clickHandler::onSaveButtonClick}"
         android:text="Save"
         android:textColor="#818181" />
 

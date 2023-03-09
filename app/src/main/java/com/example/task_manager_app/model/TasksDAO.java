@@ -26,4 +26,8 @@ public interface TasksDAO {
 
     @Query("select * from tasks_table where task_id==:taskId")
     public Tasks getTask(int taskId);
+
+    @Query("UPDATE tasks_table SET task_status=:newStatus, status_image=:newImage WHERE task_id = :taskId")
+    public void updateStatus(String newStatus, int newImage, int taskId);
+
 }

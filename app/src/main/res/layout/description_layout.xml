@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
-    <data>
-        <variable
-            name="tasks"
-            type="com.example.task_manager_app.model.Tasks" />
-    </data>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#DF000000">
 
     <TextView
         android:id="@+id/descriptionTitle_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DESCRIPTION"
+        android:textColor="@color/white"
         android:textAllCaps="true"
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="18sp"
@@ -26,11 +21,9 @@
         android:id="@+id/newDescription_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#D6D6D6"
         android:layout_marginTop="20dp"
-        android:text="@{tasks.description}"
         android:textSize="16sp"/>
 
-
 </LinearLayout>
-</layout>
 

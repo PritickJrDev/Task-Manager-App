@@ -1,5 +1,7 @@
 package com.example.task_manager_app.model;
 
+import android.media.Image;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
@@ -27,17 +29,25 @@ public class Tasks extends BaseObservable {
     @ColumnInfo (name = "desc")
     private String description;
 
+    @ColumnInfo (name = "task_status")
+    private String status;
+
+    @ColumnInfo (name = "status_image")
+    private int statusImage;
+
     @Ignore
     public Tasks(){
 
     }
 
-    public Tasks(int taskId, String taskName, String dueDate, String taskPriority, String description) {
+    public Tasks(int taskId, String taskName, String dueDate, String taskPriority, String description, String status, int statusImage) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskPriority = taskPriority;
         this.dueDate = dueDate;
         this.description = description;
+        this.status = status;
+        this.statusImage = statusImage;
     }
 
     @Bindable
@@ -88,5 +98,21 @@ public class Tasks extends BaseObservable {
     public void setDescription(String description) {
         this.description = description;
         notifyPropertyChanged(BR.description);
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getStatusImage() {
+        return statusImage;
+    }
+
+    public void setStatusImage(int statusImage) {
+        this.statusImage = statusImage;
     }
 }

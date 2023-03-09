@@ -58,4 +58,14 @@ public class TasksRepository {
             }
         });
     }
+
+    public void updateNewStatus(String newStatus, int newImage, int taskId){
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                tasksDAO.updateStatus(newStatus,newImage,taskId);
+            }
+        });
+    }
 }

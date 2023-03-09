@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.task_manager_app.databinding.ActivityAddAndEditBinding;
-import com.example.task_manager_app.databinding.DescriptionLayoutBinding;
 import com.example.task_manager_app.model.Tasks;
 
 import java.text.DateFormat;
@@ -48,16 +47,17 @@ public class AddAndEdit extends AppCompatActivity implements DatePickerDialog.On
          activityAddAndEditClickHandler = new ActivityAddAndEditClickHandler(this);
          activityAddAndEditBinding.setClickHandler(activityAddAndEditClickHandler);
 
-//        DescriptionLayoutBinding descriptionLayoutBinding = DataBindingUtil.setContentView(this,R.layout.description_layout);
-//        descriptionLayoutBinding.setTasks(tasks);
-
+        Button button = findViewById (R.id.submit_button);
          Intent i = getIntent();
          if(i.hasExtra(TASK_ID)){
-             setTitle("EDIT COURSE");
+             button.setText("UPDATE");
+             tasks.setTaskName(i.getStringExtra(TASK_NAME));
+             tasks.setDescription(i.getStringExtra(DESCRIPTION));
+             tasks.setTaskPriority(i.getStringExtra(PRIORITY));
+             tasks.setDueDate(i.getStringExtra(DUE_DATE));
          } else {
-             setTitle("CREATE TASK");
+             button.setText("SAVE");
          }
-
     }
 
     @Override
@@ -70,8 +70,6 @@ public class AddAndEdit extends AppCompatActivity implements DatePickerDialog.On
         String date = DateFormat.getDateInstance(DateFormat.FULL).format(cal.getTime());
         TextView dateTextView = findViewById(R.id.textView_pickDate);
         dateTextView.setText(date);
-
-        //String date = i+"-"+i1+"-"+i2;
         Toast.makeText(this,"Date set : "+date,Toast.LENGTH_LONG).show();
     }
 
@@ -88,12 +86,9 @@ public class AddAndEdit extends AppCompatActivity implements DatePickerDialog.On
 
             if(radioButton.getText().equals("High")){
                 priority.setText("High");
-               // priority.setTextColor(getColor(R.color.red));
             } else if(radioButton.getText().equals("Low")){
                 priority.setText("Low");
-               // priority.setTextColor(getColor(R.color.green));
             }
-            Toast.makeText(AddAndEdit.this, "Radio button : "+radioButton.getText(), Toast.LENGTH_SHORT).show();
         }
 
         public void onClickDatePicker(View view){
@@ -102,10 +97,10 @@ public class AddAndEdit extends AppCompatActivity implements DatePickerDialog.On
         }
 
         public void onSaveButtonClick(View view){
-            if(tasks.getDescription() == null){
+            if(tasks.getTaskName() == null || tasks.getDescription() == null || tasks.getTaskPriority() == null || tasks.getDueDate() == null){
                 Toast.makeText(context, "Please enter all details", Toast.LENGTH_SHORT).show();
             }
-            else{
+            else {
                 Intent i = new Intent();
                 i.putExtra(TASK_NAME,tasks.getTaskName());
                 i.putExtra(DESCRIPTION,tasks.getDescription());

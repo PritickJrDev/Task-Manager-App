@@ -32,11 +32,15 @@ public class MainActivityViewModel extends AndroidViewModel {
         tasksRepository.insertTask(task);
     }
 
-    public void updateTask(Tasks task){
+    public void updateNewTask(Tasks task){
         tasksRepository.updateTask(task);
     }
 
     public void deleteTask(Tasks task){
         tasksRepository.deleteTask(task);
+    }
+
+    public void updateNewStatus(String newStatus, int newImage, int taskId){
+        tasksRepository.updateNewStatus(newStatus,newImage,taskId);
     }
 }

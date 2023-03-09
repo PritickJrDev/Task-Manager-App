@@ -33,16 +33,4 @@ public class DatePickerFragment extends DialogFragment {
         int day = c.get(Calendar.DATE);
         return  new DatePickerDialog(getActivity(),(DatePickerDialog.OnDateSetListener)getActivity(), year, month,day);
     }
-
-//    @Override
-//    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-//        String date = i+"-"+i1+"-"+i2;
-//        View view = getLayoutInflater().inflate(R.layout.activity_add_and_edit,null);
-//        TextView dateTextView = view.findViewById(R.id.textView_pickDate);
-//        dateTextView.setText(date);
-//
-//        Toast.makeText(getActivity(),"Date set : "+date,Toast.LENGTH_LONG).show();
-//    }
-
-
 }
