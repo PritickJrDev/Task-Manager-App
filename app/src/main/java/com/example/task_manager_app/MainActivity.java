@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Tasks> listOfTasks;
     RecyclerView recyclerView;
+    RecyclerView recyclerView2;
     TasksAdapter tasksAdapter;
+    TaskCompletionAdapter taskCompletionAdapter;
 
     MainActivityViewModel mainActivityViewModel;
     ActivityMainBinding activityMainBinding;
@@ -72,9 +74,13 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel.getTasks().observe(this, new Observer<List<Tasks>>() {
             @Override
             public void onChanged(List<Tasks> tasks) {
+
                 listOfTasks = (ArrayList<Tasks>) tasks;
+
                 loadRecyclerAndAdapter();
+                loadTaskCompletionRecycleView();
                 loadListener();
+
             }
         });
     }
@@ -93,6 +99,19 @@ public class MainActivity extends AppCompatActivity {
         } else {
             textView.setText("");
         }
+    }
+
+    public void loadTaskCompletionRecycleView(){
+        recyclerView2 = activityMainBinding.recyclerView2;
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        taskCompletionAdapter = new TaskCompletionAdapter();
+        recyclerView2.setAdapter(taskCompletionAdapter);
+        taskCompletionAdapter.setListOfTask(listOfTasks);
+//        if(tasksAdapter.isCompleted){
+//            recyclerView2.setAdapter(tasksAdapter);
+//        }
+
     }
 
     public void loadListener(){

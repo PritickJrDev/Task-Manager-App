@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.Observable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ import com.example.task_manager_app.viewmodel.MainActivityViewModel;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder> {
     Context context;
@@ -37,10 +40,20 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
     ArrayList<Tasks> listOfTask;
     MainActivityViewModel mainActivityViewModel;
 
+    int fromPosition;
+    int targetPosition;
+
     public TasksAdapter(Context context, MainActivity mainActivity){
         this.context = context;
         mainActivityViewModel = new ViewModelProvider(mainActivity).get(MainActivityViewModel.class);
         setHasStableIds(true);
+    }
+
+    public void setListOfTask(ArrayList<Tasks> newTask) {
+        final DiffUtil.DiffResult result = DiffUtil.calculateDiff(
+                new TaskDiffCallback(listOfTask, newTask), false);
+        listOfTask = newTask;
+        result.dispatchUpdatesTo(TasksAdapter.this);
     }
 
     @NonNull
@@ -52,9 +65,18 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tasksLayoutBinding.setTasks(listOfTask.get(position));
-        holder.textView.setText(listOfTask.get(position).getStatus());
-        holder.statusButton.setBackgroundResource(listOfTask.get(position).getStatusImage());
+
+         fromPosition = holder.getAdapterPosition();
+         targetPosition = listOfTask.indexOf(listOfTask.get(listOfTask.size() - 1));
+
+            holder.tasksLayoutBinding.setTasks(listOfTask.get(position));
+            holder.textView.setText(listOfTask.get(position).getStatus());
+            holder.statusButton.setBackgroundResource(listOfTask.get(position).getStatusImage());
+
+//            if(listOfTask.get(position).getStatus().equals("completed") && listOfTask != null){
+//
+//                holder.tasksLayoutBinding.getRoot().setVisibility(View.GONE);
+//             }
     }
 
     @Override
@@ -86,6 +108,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
             statusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     int position = getAdapterPosition();
                     Tasks tasks = listOfTask.get(position);
 
@@ -104,6 +127,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
                     }
                 }
             });
+
 
             //for clicking button description
             tasksLayoutBinding.getRoot().findViewById(R.id.button_description).setOnClickListener(new View.OnClickListener() {
@@ -132,12 +156,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
     public interface OnItemClickListener {
         void onItemClick(Tasks task);
         void onItemDescriptionButtonClick();
-    }
-    public void setListOfTask(ArrayList<Tasks> newTask) {
-        final DiffUtil.DiffResult result = DiffUtil.calculateDiff(
-                new TaskDiffCallback(listOfTask, newTask), false);
-        listOfTask = newTask;
-        result.dispatchUpdatesTo(TasksAdapter.this);
     }
 
     public void setListener(OnItemClickListener listener){
