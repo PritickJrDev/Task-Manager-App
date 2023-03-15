@@ -40,8 +40,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
     ArrayList<Tasks> listOfTask;
     MainActivityViewModel mainActivityViewModel;
 
-    int fromPosition;
-    int targetPosition;
 
     public TasksAdapter(Context context, MainActivity mainActivity){
         this.context = context;
@@ -66,17 +64,20 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-         fromPosition = holder.getAdapterPosition();
-         targetPosition = listOfTask.indexOf(listOfTask.get(listOfTask.size() - 1));
-
             holder.tasksLayoutBinding.setTasks(listOfTask.get(position));
             holder.textView.setText(listOfTask.get(position).getStatus());
             holder.statusButton.setBackgroundResource(listOfTask.get(position).getStatusImage());
 
-//            if(listOfTask.get(position).getStatus().equals("completed") && listOfTask != null){
-//
-//                holder.tasksLayoutBinding.getRoot().setVisibility(View.GONE);
-//             }
+         if(listOfTask.get(position).getStatus().equals("completed") && listOfTask != null){
+
+             holder.tasksLayoutBinding.getRoot().findViewById(R.id.textView_taskName).setVisibility(View.GONE);
+             holder.tasksLayoutBinding.getRoot().findViewById(R.id.textView_dueDate).setVisibility(View.GONE);
+             holder.tasksLayoutBinding.getRoot().findViewById(R.id.textView_priority).setVisibility(View.GONE);
+             holder.tasksLayoutBinding.getRoot().findViewById(R.id.button_description).setVisibility(View.GONE);
+             holder.tasksLayoutBinding.getRoot().findViewById(R.id.text_status).setVisibility(View.GONE);
+             holder.tasksLayoutBinding.getRoot().findViewById(R.id.button_status).setVisibility(View.GONE);
+         }
+
     }
 
     @Override
@@ -105,6 +106,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
             statusButton = tasksLayoutBinding.getRoot().findViewById(R.id.button_status);
             textView = tasksLayoutBinding.getRoot().findViewById(R.id.text_status);
 
+
+
             statusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -116,6 +119,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.MyViewHolder
 
                     if(tasks.getStatus().equals("pending")){
                         tasks.setStatus("completed");
+
                         mediaPlayer.start();
                         tasks.setStatusImage(R.drawable.baseline_check_circle_filled_24);
                         Toast.makeText(context, "Hurray! Task Completed", Toast.LENGTH_SHORT).show();

@@ -105,12 +105,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView2 = activityMainBinding.recyclerView2;
         recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        taskCompletionAdapter = new TaskCompletionAdapter();
+        taskCompletionAdapter = new TaskCompletionAdapter(this,this);
         recyclerView2.setAdapter(taskCompletionAdapter);
         taskCompletionAdapter.setListOfTask(listOfTasks);
-//        if(tasksAdapter.isCompleted){
-//            recyclerView2.setAdapter(tasksAdapter);
-//        }
+
+        TextView textView = findViewById(R.id.divider);
+        for(int i=0; i<listOfTasks.size(); i++){
+            if(listOfTasks.get(i).getStatus().equals("completed")){
+                textView.setText("Completed Task");
+            } else {
+                textView.setText("");
+            }
+        }
+
 
     }
 
